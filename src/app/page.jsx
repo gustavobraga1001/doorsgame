@@ -1,10 +1,10 @@
-import Present from "@/components/Present";
+import Door from "@/components/Door";
 
 export default function Home() {
   return (
     <main>
       <div>
-        <Present />
+        <Door />
       </div>
     </main>
   );
