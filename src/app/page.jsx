@@ -4,7 +4,7 @@ export default function Home() {
   return (
     <main>
       <div>
-        <Door />
+        <Door selected />
       </div>
     </main>
   );
