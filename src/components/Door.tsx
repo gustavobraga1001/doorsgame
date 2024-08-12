@@ -1,5 +1,6 @@
 import styles from "../styles/Door.module.css";
 import DoorModel from "../model/door";
+import Present from "../components/Present"
 
 interface DoorProps {
   value: DoorModel;
@@ -19,11 +20,11 @@ const Door = (props: DoorProps) => {
   return (
     <div className={styles.area} onClick={toggleSelected}>
       <div className={`${styles.frame} ${selected}`}>
-        {door.open ? false :
+        {door.closed ?
           <div className={styles.door}>
             <div className={styles.number}>{door.number}</div>
             <div className={styles.handle} onClick={openDoor}></div>
-          </div>
+          </div> : door.hasGift ? <Present /> : false
         }
 
       </div>

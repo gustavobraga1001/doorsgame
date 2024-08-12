@@ -24,6 +24,10 @@ export default class DoorModel {
     return this.#open;
   }
 
+  get closed () {
+    return !this.open
+  }
+
   deselect() {
     const selected = false;
 
