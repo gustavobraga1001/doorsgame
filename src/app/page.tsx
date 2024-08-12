@@ -1,15 +1,26 @@
 "use client"; // This is a client component 👈🏽
 
 import { useState } from "react";
-import DoorModel from "../model/door";
 import Door from "../components/Door";
+import { createDoors, updateDoors } from "../functions/doors";
 
 export default function Home() {
-  const [d1, setD1] = useState(new DoorModel(1));
+  const [doors, setDoors] = useState(createDoors(3, 2))
+
+  const renderDoors = () => {
+    return doors.map(door => {
+      return <Door
+        key={door.number}
+        value={door}
+        onChange={newDoor => setDoors(updateDoors(doors, newDoor))}
+      />
+    })
+  }
+
   return (
     <main>
       <div style={{ display: "flex" }}>
-        <Door value={d1} onChange={(newDoor) => setD1(newDoor)} />
+        {renderDoors()}
       </div>
     </main>
   );
