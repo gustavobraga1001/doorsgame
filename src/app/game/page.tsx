@@ -4,6 +4,7 @@ import { createDoors, updateDoors } from "../../functions/doors"
 import Door from "../../components/Door"
 import styles from "../../styles/Game.module.css"
 import { useState } from "react";
+import Link from "next/link";
 
 const game = () => {
     const [doors, setDoors] = useState(createDoors(3, 2))
@@ -23,7 +24,9 @@ const game = () => {
                 {renderDoors()}
             </div>
             <div className={styles.buttons}>
-                
+                <Link href="/">
+                    <button>Reiniciar Jogo</button>
+                </Link>
             </div>
         </div>
     )
