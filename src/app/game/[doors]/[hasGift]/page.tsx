@@ -1,13 +1,23 @@
 "use client"; // This is a client component 👈🏽
 
-import { createDoors, updateDoors } from "../../functions/doors"
-import Door from "../../components/Door"
-import styles from "../../styles/Game.module.css"
-import { useState } from "react";
+import { createDoors, updateDoors } from "../../../../functions/doors"
+import Door from "../../../../components/Door"
+import styles from "../../../../styles/Game.module.css"
+import { useEffect, useState } from "react";
 import Link from "next/link";
+import { usePathname } from 'next/navigation'
+
 
 const game = () => {
-    const [doors, setDoors] = useState(createDoors(3, 2))
+    const [doors, setDoors] = useState([])
+    const pathname = usePathname()
+
+    useEffect(() => {
+        const pathPieces = pathname.split('/')
+        const doorsCount = Number(pathPieces[2])
+        const hasGift = Number(pathPieces[3])
+        setDoors(createDoors(doorsCount, hasGift))
+      }, [pathname])    
 
     const renderDoors = () => {
         return doors.map(door => {
