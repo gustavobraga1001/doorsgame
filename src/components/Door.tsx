@@ -1,6 +1,6 @@
 import styles from "../styles/Door.module.css";
 import DoorModel from "../model/door";
-import Present from "../components/Present"
+import Present from "./Present"
 
 interface DoorProps {
   value: DoorModel;
