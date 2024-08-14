@@ -9,6 +9,7 @@ import { usePathname } from 'next/navigation'
 
 
 const game = () => {
+    const [valid, setValid] = useState(false)
     const [doors, setDoors] = useState([])
     const pathname = usePathname()
 
@@ -16,8 +17,19 @@ const game = () => {
         const pathPieces = pathname.split('/')
         const doorsCount = Number(pathPieces[2])
         const hasGift = Number(pathPieces[3])
+        const amtDoorsValid = doorsCount >= 3 && doorsCount <= 100
+        const hasGiftValid = hasGift >= 1 && hasGift <= doorsCount
+
+        setValid(amtDoorsValid && hasGiftValid)
+    }, [doors])
+
+
+    useEffect(() => {
+        const pathPieces = pathname.split('/')
+        const doorsCount = Number(pathPieces[2])
+        const hasGift = Number(pathPieces[3])
         setDoors(createDoors(doorsCount, hasGift))
-      }, [pathname])    
+    }, [pathname])
 
     const renderDoors = () => {
         return doors.map(door => {
@@ -31,7 +43,9 @@ const game = () => {
     return (
         <div id={styles.game}>
             <div className={styles.doors}>
-                {renderDoors()}
+                {valid ? renderDoors() :
+                    <h1>Valores inválidos!</h1>
+                }
             </div>
             <div className={styles.buttons}>
                 <Link href="/">
